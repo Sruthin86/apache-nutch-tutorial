@@ -1,0 +1,13 @@
+---
+
+version: "3.3"
+
+services:
+  nutch:
+    image: nutch:msul
+    ports:
+      - 8082:8080
+      - 8081:8081
+    command: bash -c "while true; do echo hello; sleep 2; done"
+  solr: 
+    image: solr:8.11
