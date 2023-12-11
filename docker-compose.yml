@@ -10,4 +10,10 @@ services:
       - 8081:8081
     command: bash -c "while true; do echo hello; sleep 2; done"
   solr: 
-    image: solr:8.11
+    image: solr:msul
+    ports:
+      - 80:8983
+    command: 
+      - /bin/bash
+      - -c
+      - solr-create -c nutch

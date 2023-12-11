@@ -36,6 +36,28 @@ docker stack rm nutch-tutorial
 * Index: *TODO
 * Segment: Segment is a partition created, which contains the actual content that was fetched. It has 4 sub-directories 
 ### Technical Documentation
+#### Config updates
+* TODO - Move these steps into the Docker file
+	* Navigate to `/root/nutch_source/runtime/local/conf` and update the following files
+		* Replace the contents of the file  `nutch-site.xml`. 
+		
+```
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<!-- Put site-specific property overrides in this file. -->
+<configuration>
+<property>
+ <name>http.agent.name</name>
+ <value>My Nutch Spider</value>
+</property>
+</configuration>
+```
+
+* Navigate to `/root/nutch_source/runtime/local/conf/vim index-writers.xml` and update the url param.  
+```
+ <param name="url" value="http://solr:8983/solr/nutch"/>
+```
 * Enter the Nutch Docker container using 
 ```
 docker exec -it `docker ps -aqf name='nutch-tutorial_nutch'` bash
@@ -43,6 +65,10 @@ docker exec -it `docker ps -aqf name='nutch-tutorial_nutch'` bash
 * Inject url's into the db using
 ```
 nutch inject crawl/crawldb urls
+```
+* Generate a fetch list from the database
+```
+nutch generate crawl/crawldb crawl/segments
 ```
 * Fetch url's using
 ```
@@ -63,6 +89,10 @@ nutch fetch path/to/the/segment
 * Read the segments parsed. This gives the list of url's identified during the initial crawl
 ```
 nutch readseg -dump crawl/segments/20231207193710/ outputdir2 -nocontent -nofetch - nogenerate -noparse -noparsetext
+```
+* Index data into Solr
+```
+nutch index crawl/crawldb/ -linkdb crawl/linkdb/ crawl/segments/20231211212032/ -filter -normalize -deleteGone
 ```
 ## Project status
 If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
