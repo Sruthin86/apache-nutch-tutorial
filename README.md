@@ -14,6 +14,14 @@
 ```
   docker swarm init
 ```
+* Build the custom nutch image using
+```
+docker build ./ -t nutch:msul --no-cache
+```
+* Build the custom solr image using
+```
+docker build ./ -t solr:msul --no-cache
+```
 * Deploy the Apache Nutch Application using
 ```
 docker stack deploy -c docker-compose.yml nutch-tutorial
