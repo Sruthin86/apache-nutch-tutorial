@@ -88,11 +88,11 @@ nutch fetch path/to/the/segment
 ```
 * Read the segments parsed. This gives the list of url's identified during the initial crawl
 ```
-nutch readseg -dump crawl/segments/20231207193710/ outputdir2 -nocontent -nofetch - nogenerate -noparse -noparsetext
+nutch readseg -dump crawl/segments/{segment_file} outputdir2 -nocontent -nofetch - nogenerate -noparse -noparsetext
 ```
 * Index data into Solr
 ```
-nutch index crawl/crawldb/ -linkdb crawl/linkdb/ crawl/segments/20231211212032/ -filter -normalize -deleteGone
+nutch index crawl/crawldb/ -linkdb crawl/linkdb/ crawl/segments/{segment_file} -filter -normalize -deleteGone
 ```
 ## Project status
 If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
