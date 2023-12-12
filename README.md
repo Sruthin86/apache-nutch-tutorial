@@ -104,7 +104,7 @@ nutch parse [-D...] <segment>
 
 # Example
 
-nutch fetch path/to/the/segment
+nutch parse path/to/the/segment
 ```
 * Read the segments parsed. This gives the list of url's identified during the initial crawl
 ```
