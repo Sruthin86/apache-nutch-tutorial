@@ -23,7 +23,7 @@ docker build ./ -t nutch:msul --no-cache
 ```
 * Build the custom solr image using
 ```
-docker build ./ -t solr:msul --no-cache
+docker build ./solr -t solr:msul --no-cache
 ```
 * Deploy the Apache Nutch Application using
 ```
@@ -43,13 +43,13 @@ _Source: https://medium.com/@mobomo/the-basics-working-with-nutch-e5a7d37af231_
 
 ### Glossary
 * **Seed**: List of url's that are ready to be fetched and indexed
-* **Inject**: Reads the list of url's from the seed file and add them to the list of pages to be crawled. This list is updated with additional metadata in the next steps of the lifecycle
+* **Inject**: Reads the list of url's from the seed file and add them to the list of pages to be crawled. This list is updated with additional metadata in the next steps of the lifecycle.
 * **Generate**: Reads the list of injected url's and creates segments based on the eligibility of a page/url.
-* **Segment**: Segment is a partition created, which contains the fetch list, content, and the parsed content. The content in segment varies at different stages of the lifecycle. I 
-* **Fetch**: Reads the fetch list from the segments and requests the content for each of the url's in the list
-* **Parse**: Processes the content fetched and primes it for indexing into Solr. This step includes identifying the title, page url, page body from the fetched content.
+* **Segment**: Segment is a partition created, which contains the fetch list, content, and the parsed content. The content in segment varies at different stages of the lifecycle.
+* **Fetch**: Reads the fetch list from the segments and requests the content for each of the url's in the list.
+* **Parse**: Processes the content fetched and primes it for indexing into Solr. This step includes identifying the title, page url, and page body from the fetched content.
 * **Index**: Indexes data into a Lucene based search.
-* **Lucene**: A java based full-text indexing and searching software
+* **Lucene**: A java based full-text indexing and searching software.
 * **Solr**: A wrapper around Lucene providing a GUI and adding the ability to configure indexing and searching.
 
 ### Technical Documentation
