@@ -3,16 +3,16 @@
 
 - Nutch is a production ready web crawler that works in tandem with Apache Solr
 
-## (#problem-statement)Problem Statement
+## Problem Statement
 
 Springshare's search API does search full text but it does not return the matching full text snippet. The full text snippet provides more context to the matched results and this is a feature requested by the Reference & Discovery Services team.
 
-## (#docker-installation)Docker installation
+## Docker installation
 
 - Docker is a containerization tool used for developing, packaging and running applications
 - Install Docker on the host machine with the [instructions outlined here](https://docs.docker.com/engine/install/)
 
-### (#initialize-swarm)Initialize Swarm
+### Initialize Swarm
 
 - Docker Swarm is a container orchestration tool which consists of multiple services on a given node
 - A Docker host can be a manager or a worker node or both in some cases
@@ -46,14 +46,14 @@ docker stack deploy -c docker-compose.yml nutch-tutorial
 docker stack rm nutch-tutorial
 ```
 
-## (#getting-started-with-nutch)Getting started with Nutch
+## Getting started with Nutch
 
 - Apache Nutch is a production ready web crawler to fetch, parse and index website data into Apache Solr
 - Lifecycle of Apache Nutch crawl [![Lifecycle of an Apache Nutch crawl](https://miro.medium.com/v2/resize:fit:1400/format:webp/0*P8r3uuWkzhlpVgk9.png)](https://miro.medium.com/v2/resize:fit:1400/format:webp/0*P8r3uuWkzhlpVgk9.png)
 
 _Source: [https://medium.com/@mobomo/the-basics-working-with-nutch-e5a7d37af231](https://medium.com/@mobomo/the-basics-working-with-nutch-e5a7d37af231)_
 
-### (#glossary)Glossary
+### Glossary
 
 - **Seed**: List of url's that are ready to be fetched and indexed
 - **Inject**: Reads the list of url's from the seed file and add them to the list of pages to be crawled. This list is updated with additional metadata in the next steps of the lifecycle.
@@ -65,9 +65,9 @@ _Source: [https://medium.com/@mobomo/the-basics-working-with-nutch-e5a7d37af231
 - **Lucene**: A java based full-text indexing and searching software.
 - **Solr**: A wrapper around Lucene providing a GUI and adding the ability to configure indexing and searching.
 
-### (#technical-documentation)Technical Documentation
+### Technical Documentation
 
-#### (#config-updates)Config updates
+#### Config updates
 
 - TODO - Move these steps into the Docker file
     - Navigate to `/root/nutch_source/runtime/local/conf` and update the following files
@@ -163,7 +163,7 @@ bin/nutch updatedb crawl/crawldbpath/to/the/segment
 nutch index crawl/crawldb/ -linkdb crawl/linkdb/ crawl/segments/{segment_file} -filter -deleteGone
 ```
 
-### (#getting-started-with-solr)Getting started with Solr
+### Getting started with Solr
 
 Solr is initialized as a prat of this stack and a `nutch` core is created during container startup. Nutch provides us with a baseline schema for the core which needs to be updated in Solr. Additional configurations can be added to the schema based on requirements
 
