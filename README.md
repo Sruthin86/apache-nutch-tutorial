@@ -63,6 +63,7 @@ _Source: [https://medium.com/@mobomo/the-basics-working-with-nutch-e5a7d37af231
 - **Index**: Indexes data into a Lucene based search.
 - **Lucene**: A java based full-text indexing and searching software.
 - **Solr**: A wrapper around Lucene providing a GUI and adding the ability to configure indexing and searching.
+- **Hadoop Map Files**: A directory containing 2 files, *data* and *index*. Data file consists of key and values and the index file consists of fraction of the keys. The index file is loaded into the memory for quick lookup.
 
 ### Technical Documentation
 
