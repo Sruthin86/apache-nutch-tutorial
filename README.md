@@ -1,6 +1,5 @@
 # Apache-Nutch
 
-
 - Nutch is a production ready web crawler that works in tandem with Apache Solr
 
 ## Problem Statement
@@ -98,8 +97,15 @@ _Source: [https://medium.com/@mobomo/the-basics-working-with-nutch-e5a7d37af231
 docker exec -it `docker ps -aqf name='nutch-tutorial_nutch'` bash
 ```
 
+##### Seed
+* A text file containing list of url's with one url per line.
+* The url's can contain optional metadata  separated by tabs, represented in key=value format
+```
+https://libguides.lib.msu.edu/ISB202Taylor
+https://libguides.lib.msu.edu/ISB202Taylor nutch.score=10 nutch.fetchInterval=2592000
+```
 ##### Inject
-- A seeds.txt file is required for this step. This is the starting point for Nutch to crawl the url's 
+- A seeds.txt file is required for this step. This is the starting point for Nutch to crawl the url's
 - Inject url's into the db using
 
 ```
@@ -119,7 +125,7 @@ nutch generate crawl/crawldb crawl/segments
 ```
 
 ##### Fetch
-- Crawls the url's from the generate step and fetches the content. 
+- Crawls the url's from the generate step and fetches the content.
 - Fetch url's using
 
 ```
@@ -128,6 +134,11 @@ nutch fetch [-D...] <segment>
 # Example
 
 nutch fetch path/to/the/segment
+```
+* Number of threads used for fetching can be passed as an argument.
+* Increasing the thread count could make the fetch go faster but may overwhelm the server
+```
+nutch fetch path/to/the/segment -threads 50
 ```
 
 ##### Parse
@@ -146,6 +157,20 @@ nutch parse path/to/the/segment
 
 ```
 nutch readseg -dump crawl/segments/{segment_file} outputdir2 -nocontent -nofetch - nogenerate -noparse -noparsetext
+
+# options for reading segments
+
+-nocontent: Pass this to ignore the content directory.
+
+-nofetch: To ignore the crawl_fetch directory.
+
+-nogenerate: To ignore the crawl_generate directory.
+
+-noparse: To ignore the crawl_parse directory.
+
+-noparsedata: To ignore the parse_data directory.
+
+-noparsetext: To ignore the parse_text directory.
 ```
 
 ##### Updatedb
@@ -153,7 +178,7 @@ nutch readseg -dump crawl/segments/{segment_file} outputdir2 -nocontent -nofetch
 - Update the the db with additional metadata after fetch
 
 ```
-bin/nutch updatedb crawl/crawldbpath/to/the/segment
+bin/nutch updatedb crawl/crawldb path/to/the/segment
 ```
 
 ##### Index
@@ -170,8 +195,8 @@ Solr is initialized as a prat of this stack and a `nutch` core is created duri
 - Copy the Nutch schema into the newly created nutch core inside of the docker container
 
 ```
-Exec into container using 
-docker exec -it `docker ps -aqf name='nutch-tutorial_solr'` bash 
+Exec into container using
+docker exec -it `docker ps -aqf name='nutch-tutorial_solr'` bash
 
 Schema location: /solr/managed-schema
 Container location: /var/solr/data/nutch/conf
@@ -179,3 +204,4 @@ Container location: /var/solr/data/nutch/conf
 
 - Solr is available inside the container on port `8983` and can be accessed by other services in the atck using `http://solr:8983`
 - Solr is available on the host machine on  `80` and can be accessed using `http://localhost:80`
+
