@@ -86,7 +86,7 @@ _Source: [https://medium.com/@mobomo/the-basics-working-with-nutch-e5a7d37af231
 </configuration>
 ```
 
-- Navigate to `/root/nutch_source/runtime/local/conf/vim index-writers.xml` and update the url param.
+- Navigate to `/root/nutch_source/runtime/local/conf/index-writers.xml` and update the url param.
 
 ```
  <param name="url" value="http://solr:8983/solr/nutch"/>
@@ -179,7 +179,7 @@ nutch readseg -dump crawl/segments/{segment_file} outputdir2 -nocontent -nofetch
 - Update the the db with additional metadata after fetch
 
 ```
-bin/nutch updatedb crawl/crawldb path/to/the/segment
+nutch updatedb crawl/crawldb path/to/the/segment
 ```
 
 ##### Index
